@@ -43,31 +43,7 @@ Chris S. Student\\
 
 \maketitle
 \begin{abstract}
-This paper provides a sample of a \LaTeX\ document which conforms,
-somewhat loosely, to the formatting guidelines for the University of
-Minnesota, Morris, Computer Science Senior Seminar proceedings.
-It is based heavily on (and takes material directly from) a similar document 
-illustrating the format of the ACM SIG Proceedings, which we have based our
-proceedings format on.
 
-The original ACM document tried to include
-\begin{quote}
-every imaginable sort
-of ``bells and whistles", such as a subtitle, footnotes on
-title, subtitle and authors, as well as in the text, and
-every optional component (e.g. Acknowledgments, Additional
-Authors, Appendices), not to mention examples of
-equations, theorems, tables and figures.
-\end{quote}
-
-We've removed many of the more esoteric tricks here because either
-they'll never be used (e.g., multiple authors) or are used \emph{very}
-rarely (e.g., appendices). Refer to the original ACM document for more
-of those fancy examples.
-% The current paper format *only* allows inline comments using the todo
-% macro. That's kind of a bummer, and it would be neat if someone figured
-% out how to change the acmconf style to allow this. I suspect it isn't *hard*
-% but there are quite a few details that have to be sorted out in synchrony.
 \todo[inline]{Needs more work}
 \end{abstract}
 
@@ -453,52 +429,14 @@ use the \texttt{\textbackslash newtheorem} or the
 \texttt{\textbackslash newdef} command,
 respectively, to create it.
 
-\subsection*{A {\secit Caveat} for the \TeX\ Expert}
-\label{sec:caveatForExperts}
-
-Because you have just been given permission to
-use the \texttt{\textbackslash newdef} command to create a
-new form, you might think you can
-use \TeX's \texttt{\textbackslash def} to create a
-new command: \textit{Please refrain from doing this!}
-Remember that your \LaTeX\ source code is primarily intended
-to create camera-ready copy, but may be converted
-to other forms -- e.g. HTML. If you inadvertently omit
-some or all of the \texttt{\textbackslash def}s recompilation will
-be, to say the least, problematic.
-
 \section{Conclusions}
 \label{sec:conclusions}
 
-This paragraph will end the body of this sample document.
-Remember that you might still have Acknowledgments or
-Appendices; brief samples of these
-follow.  There is still the Bibliography to deal with; and
-we will make a disclaimer about that here: with the exception
-of the reference to the \LaTeX\ book, the citations in
-this paper are to articles which have nothing to
-do with the present subject and are used as
-examples only.
+
 
 \section*{Acknowledgments}
 \label{sec:acknowledgments}
 
-This section is optional; it is a location for you
-to acknowledge grants, funding, editing assistance and
-what have you.
-
-You want to use the \texttt{\textbackslash section*} version of the \texttt{section}
-command, as an acknowledgments section typically does \emph{not} get
-a number.
-
-It is common (but by no means necessary) for students to thank
-their advisor, and possibly other faculty, friends, and family who provided
-useful feedback on the paper as it was being written.
-
-In the present case, for example, the
-authors would like to thank Gerald Murray of ACM for
-his help in codifying this \textit{Author's Guide}
-and the \textbf{.cls} and \textbf{.tex} files that it describes.
 
 % The following two commands are all you need in the
 % initial runs of your .tex file to

@@ -1,0 +1,142 @@
+% This is a sample document using the University of Minnesota, Morris, Computer Science
+% Senior Seminar modification of the ACM sig-alternate style. Much of this content is taken
+% directly from the ACM sample document illustrating the use of the sig-alternate class. Certain
+% parts that we never use have been removed to simplify the example, and a few additional
+% components have been added.
+
+% See https://github.com/UMM-CSci/Senior_seminar_templates for more info and to make
+% suggestions and corrections.
+
+\documentclass{sig-alternate}
+\usepackage{color}
+\usepackage[colorinlistoftodos]{todonotes}
+
+%%%%% Uncomment the following line and comment out the previous one
+%%%%% to remove all comments
+%%%%% NOTE: comments still occupy a line even if invisible;
+%%%%% Don't write them as a separate paragraph
+%\newcommand{\mycomment}[1]{}
+
+\begin{document}
+
+% --- Author Metadata here ---
+%%% REMEMBER TO CHANGE THE SEMESTER AND YEAR AS NEEDED
+\conferenceinfo{UMM CSci Senior Seminar Conference, April 2017}{Morris, MN}
+
+\title{Convolutional Neural Networks in Medical Imaging}
+
+\numberofauthors{1}
+
+\author{
+% The command \alignauthor (no curly braces needed) should
+% precede each author name, affiliation/snail-mail address and
+% e-mail address. Additionally, tag each line of
+% affiliation/address with \affaddr, and tag the
+% e-mail address with \email.
+\alignauthor
+Mitchell Finzel\\
+	\affaddr{Division of Science and Mathematics}\\
+	\affaddr{University of Minnesota, Morris}\\
+	\affaddr{Morris, Minnesota, USA 56267}\\
+	\email{finze008@morris.umn.edu}
+}
+
+\maketitle
+\begin{abstract}
+
+Ever since the boom in convolutional neural network popularity due to the success of their use in the 2012 ImageNet competition, there has been a large uptake in their use in the field of medical imaging segmentation and classification. Over the past 5 years there has been a surge in their success, achieving state-of-the-art performance across a broad variety of medical imaging systems ranging from the segmentation of knee cartilage all the way to the detection of Alzheimer's disease in MRIs. In this paper we will go over some of the cutting edge architecture techniques being used specifically for the tasks of brain segmentation and classification. The results are proving to be quite promising and could be a step towards the adoption of automatic segmentation systems in day to day medical diagnosis.
+
+\end{abstract}
+
+\keywords{ACM proceedings, \LaTeX, text tagging}
+
+\section{Introduction}
+\label{sec:introduction}
+
+~\cite{Havaei:2017}
+
+\section{Background}
+\label{sec:background}
+
+
+
+\subsection{Neural Networks 101}
+\label{sec:neuralNetworks101}
+
+
+\subsection{Convolutional Layers}
+\label{sec:convolutionalLayers}
+
+
+\subsection{Pooling Layers}
+\label{sec:poolingLayers}
+
+
+
+\subsection{Kernals}
+\label{sec:kernals}
+
+
+\subsection{Softmax Layers}
+\label{sec:softmaxLayers}
+
+
+
+\section{Methods}
+\label{sec:methods}
+
+
+\subsection{Multi-modality approach in infannt isointense brains}
+\label{sec:multiModality}
+
+\subsection{Novel approaches in brain tumor segmentation}
+\label{sec:novelBrainTumorApproach}
+
+In ~\cite{Havaei:2017} Havaei et al created a novel two path approach for a CNN trained on the Multimodal Brain Tumor Segmentation (BRATS 2013) challenge data set. Their approach can be broken down into three main components, the use of two pathways, the concatenation of one CNN's output into a seconds and the use of a two-phase training approach.
+
+To setup their two pathway CNN Havaei et al created an architecture with two streams, a local pathway with a 7 x 7 receptive field and a global pathway with a 13 x 13 receptive field. By combining a localized and global perspective the architecture has the ability to detect visual detail around the centered pixel while also capturing data about the greater context of that pixel's location within the brain.
+
+These two pathways are concatenated together after going through a series of convolutional layers, 2 layers for the local pathway and 1 for the global pathway. This final concatenation of the two pathways is then sent through the output layer to be interpreted as segmentation labels.
+
+An issue with traditional CNN segmentation systems is that they predict the segmentation labels independent of one another, ignoring the possibility of joint segmentation label models. To address this issue ~\cite{Havaei:2017} propose three different cascaded CNN architectures, where the output of one CNN is concatenated into one of the layers in a second CNN. By using a cascaded architecture Havaei et al allow the second CNN to learn from the values of nearby labels.
+
+The three different cascaded architectures implemented by Havaei et al are variations on their two pathway approach described above; both of the CNNs use two pathways. The main variation between these three different architectures is the location of the concatenation of the first CNN with the second. The first implementation, InputCascadeCNN, takes the output of the first CNN and directly concatenates it to the input of the second CNN. The second implementation, LocalCascadeCNN, takes the output of the first CNN and concatenates it to the first convolutional layer of the second CNNs local pathway. The final implementation, MFCascadeCNN, concatenates the output of the first CNN to the final layer of the second CNN, directly before its output.
+
+The third main component in the research done by ~\cite{Havaei:2017} is the use of a two-phase training system. One of the large issues in training CNNs for segmentation is the relative abundance of healthy tissue as compared to the small quantities of tissue that fall under each label. This is especially true of brains where labels can be comprised of less than 1 percent of the total images composition. To alleviate this problem Havaei et al first train the CNN on an image patch data set where all of the labels are equally probable. They then retrain the final output layer taking into account the relative probabilities of the labels,thereby keeping the discriminatory capability of the previous layers intact while maintaining proper output probabilities.
+
+
+
+\subsection{3D multi-scale approach in 3 lesion segmentation tasks}
+\label{sec:3DMultiScale}
+
+\subsection{3D approach in Alzheimer's}
+\label{sec:3DAlzheimers}
+
+
+
+\section{Results}
+\label{sec:results}
+
+
+\section{Conclusions}
+\label{sec:conclusions}
+
+
+
+\section*{Acknowledgments}
+\label{sec:acknowledgments}
+
+
+% The following two commands are all you need in the
+% initial runs of your .tex file to
+% produce the bibliography for the citations in your paper.
+\bibliographystyle{abbrv}
+% sample_paper.bib is the name of the BibTex file containing the
+% bibliography entries. Note that you *don't* include the .bib ending here.
+\bibliography{main}  
+% You must have a proper ".bib" file
+%  and remember to run:
+% latex bibtex latex latex
+% to resolve all references
+
+\end{document}
