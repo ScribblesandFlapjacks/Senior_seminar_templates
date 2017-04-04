@@ -1,12 +1,3 @@
-% This is a sample document using the University of Minnesota, Morris, Computer Science
-% Senior Seminar modification of the ACM sig-alternate style. Much of this content is taken
-% directly from the ACM sample document illustrating the use of the sig-alternate class. Certain
-% parts that we never use have been removed to simplify the example, and a few additional
-% components have been added.
-
-% See https://github.com/UMM-CSci/Senior_seminar_templates for more info and to make
-% suggestions and corrections.
-
 \documentclass{sig-alternate}
 \usepackage{color}
 \usepackage[colorinlistoftodos]{todonotes}
@@ -43,7 +34,7 @@ Mitchell Finzel\\
 
 \maketitle
 \begin{abstract}
-
+\todo[inline]{Currently unchanged from section draft}
 Ever since the boom in convolutional neural network popularity due to the success of their use in the 2012 ImageNet competition, there has been a large uptake in their use in the field of medical imaging segmentation and classification. Over the past 5 years there has been a surge in their success, achieving state-of-the-art performance across a broad variety of medical imaging systems ranging from the segmentation of knee cartilage all the way to the detection of Alzheimer's disease in MRIs. In this paper we will go over some of the cutting edge architecture techniques being used specifically for the tasks of brain segmentation and classification. The results are proving to be quite promising and could be a step towards the adoption of automatic segmentation systems in day to day medical diagnosis.
 
 \end{abstract}
@@ -53,29 +44,34 @@ Ever since the boom in convolutional neural network popularity due to the succes
 \section{Introduction}
 \label{sec:introduction}
 
-~\cite{Havaei:2017}
+In 2012 convolutional neural networks or CNNs, were used to great success improving drastically over the previous state-of-the-arts in the ImageNet computer vision competition. ~\cite{NIPS:2012} Since their success in image recognition CNN's have seen a rise in popularity, finding their way into more complex computer vision challenges such as medical imaging. In the past 5 years there has been a large uptick in the use of CNNs in biological segmentation tasks. These tasks extend across a wide variety of human anatomy. For example CNNs have been used for the automated detection of lymph nodes ~\cite{Roth:2014}, the segmentation of knee cartilage ~\cite{Prasoon:2013} and Alzheimer's detection ~\cite{Payan:2015} to name a few. For this paper we will be focusing on two specific examples of CNN use in medical imaging segmentation ~\cite{Havaei:2017} by Havaei, et al. and ~\cite{Kamnitsas:2017} by Kamnitsas, et al. These two papers show different approaches to CNN architecture applied to the segmentation of MRIs. While the results obtained by both approaches is not directly comparable we will go through what makes their approaches unique and where there is some overlap. After discussing their features we will take a look at their state-of-the-art results on a few different segmentation challenges.
 
 \section{Background}
 \label{sec:background}
 
-
+Before delving into the specifics of the network architecture approaches that are being employed we will look at some of the fundamentals of CNNs and segmentation in general. When talking about segmentation in the field of medical imaging we are talking about being able to classify different parts of a medical image. For instance in an MRI of a brain we might want to segment base on what's white versus grey matter. These "labels", white matter and grey matter, are the outputs of the CNN. Currently most of this segmentation is done by hand by medical professionals, but advances in automatic segmentation have made great strides in the past few years. 
 
 \subsection{Neural Networks 101}
 \label{sec:neuralNetworks101}
 
+At their most basic form neural networks are essentially pattern recognizers. We train the neural network on a large amount of input and then it learns to recognize features and associates them with the output labels. Neural networks are generally composed of a number of layers that perform a variety of operations, each layer learning from the previous ones.
 
 \subsection{Convolutional Layers}
 \label{sec:convolutionalLayers}
 
+Convolutional Layers are what differentiate convolutional neural networks from other neural networks, the first layer of all CNNs is a convolutional one. The convolutional layer takes an array of values that represents either the pixels or voxels of the input image. The layer then uses what is interchangeably called a filter, neuron or kernel, which is another array with the same depth as the input array. The kernel is then aligned to the upper left corner of the input, the area it covers is called the receptive field. The array  contained within the receptive field is the multiplied with the array in the kernel using element-wise multiplication. The multiplications are then summed up and stored in the same relative position of what's called a feature map. The kernel then slides over a specified distance on the input and performs the same operation. What we end up with after all of the possible convolutions of the kernel and the input is a completed feature map. The feature map is an array that contains all of the results of the convolutions between the kernel and the input.
+
+\subsection{Kernels}
+\label{sec:kernels}
+
+Kernels, as described above, are arrays of values that are meant to represent features to be recognized. For instance a kernel could contain a feature such as a curve. This might be represented by a pattern of numbers in the kernels array. When the kernel is multiplied with the input the result will be a higher number if the feature in the kernel is similar to the feature explained by the receptive field. If the feature described by the kernel is not present in the receptive field then the result of the multiplication will be relatively smaller. These recognitions of features are then stored in the feature map where they will likely be used as the input to the next layer. To increase the depth of feature recognition in a layer, just add more kernels. As these feature maps are used in future layers of similar operations a hierarchy of features is created with more complex features being represented in later layers.
 
 \subsection{Pooling Layers}
 \label{sec:poolingLayers}
 
+Another oft used layer type is called a pooling layer. These layers have a relatively straightforward purpose, they take clusters from the input feature map and reduce them down to a single feature. For instance, an example of a pooling operation is max-pool. A max-pool pooling layer will divide the input into clusters and place the highest value of each cluster in their corresponding place in the pooling layer's feature map. Pooling layers are used to drastically reduce the amount of spacial data by eliminating a large portion of the input in one step. They also reduce the effects of overfitting, which is essentially when the neural network becomes to finely tuned to the training data and fails to generalize well.
 
-
-\subsection{Kernals}
-\label{sec:kernals}
-
+\todo[inline]{Need sections on fully connected layers, softmax classifiers and training.}
 
 \subsection{Softmax Layers}
 \label{sec:softmaxLayers}
@@ -86,12 +82,12 @@ Ever since the boom in convolutional neural network popularity due to the succes
 \label{sec:methods}
 
 
-\subsection{Multi-modality approach in infannt isointense brains}
+\subsection{Multi-modality approach in infant isointense brains}
 \label{sec:multiModality}
 
 \subsection{Novel approaches in brain tumor segmentation}
 \label{sec:novelBrainTumorApproach}
-
+\todo[inline]{Only minor edits since the section draft; inclusion of a figure}
 In ~\cite{Havaei:2017} Havaei et al created a novel two path approach for a CNN trained on the Multimodal Brain Tumor Segmentation (BRATS 2013) challenge data set. Their approach can be broken down into three main components, the use of two pathways, the concatenation of one CNN's output into a seconds and the use of a two-phase training approach.
 
 To setup their two pathway CNN Havaei et al created an architecture with two streams, a local pathway with a 7 x 7 receptive field and a global pathway with a 13 x 13 receptive field. By combining a localized and global perspective the architecture has the ability to detect visual detail around the centered pixel while also capturing data about the greater context of that pixel's location within the brain.
@@ -100,14 +96,47 @@ These two pathways are concatenated together after going through a series of con
 
 An issue with traditional CNN segmentation systems is that they predict the segmentation labels independent of one another, ignoring the possibility of joint segmentation label models. To address this issue ~\cite{Havaei:2017} propose three different cascaded CNN architectures, where the output of one CNN is concatenated into one of the layers in a second CNN. By using a cascaded architecture Havaei et al allow the second CNN to learn from the values of nearby labels.
 
-The three different cascaded architectures implemented by Havaei et al are variations on their two pathway approach described above; both of the CNNs use two pathways. The main variation between these three different architectures is the location of the concatenation of the first CNN with the second. The first implementation, InputCascadeCNN, takes the output of the first CNN and directly concatenates it to the input of the second CNN. The second implementation, LocalCascadeCNN, takes the output of the first CNN and concatenates it to the first convolutional layer of the second CNNs local pathway. The final implementation, MFCascadeCNN, concatenates the output of the first CNN to the final layer of the second CNN, directly before its output.
+\begin{figure*}
+\centering
+\psfig{file=Cascaded Architectures.pdf,width =5.3in}
+\caption{The three different "cascaded" architectures used by Havaei, et al. ~\cite{Havaei:2017}}
+\label{fig:cascadedArchitectures}
+\end{figure*}
 
-The third main component in the research done by ~\cite{Havaei:2017} is the use of a two-phase training system. One of the large issues in training CNNs for segmentation is the relative abundance of healthy tissue as compared to the small quantities of tissue that fall under each label. This is especially true of brains where labels can be comprised of less than 1 percent of the total images composition. To alleviate this problem Havaei et al first train the CNN on an image patch data set where all of the labels are equally probable. They then retrain the final output layer taking into account the relative probabilities of the labels,thereby keeping the discriminatory capability of the previous layers intact while maintaining proper output probabilities.
+The three different cascaded architectures implemented by Havaei et al are variations on their two pathway approach described above; both of the CNNs, the original and the one being concatenated in later, use two pathways. The main variation between these three different architectures is the location of the concatenation of the first CNN with the second. As can be seen in ~\ref{fig:cascadedArchitectures} the first implementation, InputCascadeCNN, takes the output of the first CNN and directly concatenates it to the input of the second CNN. The second implementation, LocalCascadeCNN, takes the output of the first CNN and concatenates it to the first convolutional layer of the second CNNs local pathway. The final implementation, MFCascadeCNN, concatenates the output of the first CNN to the final layer of the second CNN, directly before its output.
+
+The third main component in the research done by ~\cite{Havaei:2017} is the use of a two-phase training system. One of the large issues in training CNNs for segmentation is the relative abundance of healthy tissue as compared to the small quantities of tissue that fall under each label. This is especially true of brains where labels can be comprised of less than 1 percent of the total images composition. To alleviate this problem Havaei, et al. first train the CNN on a data set of image patches where all of the labels are equally probable. They then retrain the final output layer taking into account the relative probabilities of the labels,thereby keeping the discriminatory capability of the previous layers intact while maintaining proper output probabilities.
 
 
 
 \subsection{3D multi-scale approach in 3 lesion segmentation tasks}
 \label{sec:3DMultiScale}
+
+In ~\cite{Kamnitsas:2017} Kamnitsas, et al. provide one of the most recent architectural approaches to CNNs in the field of medical imaging segmentation. Their work can be boiled down to a few main techniques drawing from a wealth of past research. These main techniques include the use of 3D CNNs, dense-inference for network training, 3D CRFs for the final processing of the networks soft segmentation maps, deep networks for better discrimination and two pathways using a multi-scale approach.
+
+Much like the work done by Havaei, et al. Kamnitsas, et al. uses a two pathway approach to better capture local information while maintaining the broader context of the entire image. However, while Havaei, et al. accomplishes this two pathway approach by using a different sized receptive field in each pathway, Kamnitsas, et al. downsamples the image itself. \todo[inline]{I need to better understand if there is a difference between these methods}
+
+
+\begin{figure*}
+\centering
+\psfig{file=3D CNN.pdf,width =7in}
+\caption{The basic neural network architecture used by Kamnitsas, et al. in ~\cite{Kamnitsas:2017}}
+\label{fig:DeepMedic}
+\end{figure*}
+
+The network displayed in ~\ref{fig:DeepMedic} is a simplified version of Kamnitsas full blown network "DeepMedic". As can be seen in the figure the network has two pathways, one with the normal resolution image patch and the other with a down-sampled patch. These patches then go through a series of convolutional layers before two fully connected layers and the final classifier layer. DeepMedic has twice as many convolutional layers as the depicted figure, using a smaller 3\textsuperscript{3} kernel size.
+
+One of the biggest attributes of the work done by Kamnitsas, et al. is the use of 3D CNNs for the basis of their architecture. In the past, research has avoided the use of full blown 3D CNNs due to their increase in parameters and computational requirements. Prior research such as that done by Havaei, et al. ~\cite{Havaei:2017} used 3D slices of the medical image. Hybrid approaches such as training on three orthogonal slices (coronal, sagittal and axial) have been used to cheaply approximate 3D CNNs ~\cite{Roth:2014}. The 3D CNNs used by Kamnitsas, et al. use three-dimensional kernels in the convolutional layers to create the feature maps. This can be thought of as a cube traversing the volume of the image at hand. The use of these 3D CNNs allow for better use of the volumetric data at hand and allows for the full exploitation of dense-inference.
+\todo[inline]{Need to give more in depth explanation of 3D CNNs}
+
+\todo[inline]{Explain Dense Inference, also known as better understand what dense inference is}
+
+In CNNs it has been shown that deeper networks have greater discriminitive capability due to their additional non-linearities and better defined local optima. While deeper networks have greater discriminitive power it is also true that they have greater computational costs, which is further exaggerated by the use of 3D convolutions. There is also an increase in the number of trainable parameters that is associated with the use of 3D CNNs. To combat these barriers Kamnitsas, et al. replace convolutional layers that have a standard 5\textsuperscript{3} kernal size with multiple layers that use a smaller 3\textsuperscript{3} kernel size. These smaller kernels require fewer parameters and lead to a significant decrease in element-wise multiplications per layer. ~\cite{Kamnitsas:2017}
+
+Deeper networks also suffer from being harder to train. As the network becomes deeper it becomes harder to preserve the signal. This is caused by the multiplication of the signals variance as it propagates through each layer. To alleviate this Kamnitsas, et al. initialize their kernel weights to the normal distribution \todo[inline]{Add formula}. They also use a technique called batch normalization to deal with the similar issue of covariate shift, but this is outside of the scope of this paper.
+
+\todo[inline]{Explain the 3D CRF, also known as better understand 3D CRFs}
+
 
 \subsection{3D approach in Alzheimer's}
 \label{sec:3DAlzheimers}
@@ -116,11 +145,31 @@ The third main component in the research done by ~\cite{Havaei:2017} is the use 
 
 \section{Results}
 \label{sec:results}
+\todo[inline]{Explain what dice, specificity and sensitivity are}
 
+As mentioned before the work done by Havaei, et al. was applied to the BRATS 2013 challenge. They also attempted to use their system on the BRATS 2014 dataset, but were unable to get the system to work due to problems with the dataset itself. For the BRATS 2013 Challenge contenders used an online evaluation tool that provided Dice, specificity and sensitivity scores for the three categories the complete tumor region, the core tumor region and the enhancing tumor region. Their highest scoring network configuration improved on the state of the art in both accuracy and speed.
+
+\todo[inline]{Add table of results for the for Havaei BRATS 2013}
+
+The architectures proposed by Kamnitsas, et al. were applied to three different brain related challenges. The first was a challenge involving a database of MRIs from people who had suffered traumatic brain injuries, TBI. The second was on the BRATS 2015 dataset, which much like BRATS 2013 measured dice, specificity and sensitivity on the three categories of brain tumor hierarchies. The last was on the ISLES 2015 challenge that dealt with the segmentation of brain lesions caused by stroke. In all cases the DeepMedic + CRF architecture they propose beat the scores of the previous state-of-the-art approaches. In all cases the addition of the 3D CRF was found to have a statistically significant affect on performance.
+
+\todo[inline]{More tables of results, probably don't need to show all of them}
+
+\begin{figure*}
+\centering
+\psfig{file=TBI Visuals.pdf,width =6in}
+\caption{Three examples from the TBI dataset. The first two columns show the original MRIs with the third column showing the images segmented manually and the last two columns showing the segmentation performed by DeepMedic and DeepMedic with the CRF. Kamnitsas, et al. ~\cite{Kamnitsas:2017}}
+\label{fig:TBIVisuals}
+\end{figure*}
+
+Figure ~\ref{fig:TBIVisuals} shows an example pulled from ~\cite{Kamnitsas:2017} of DeepMedic's segmentation of three different MRIs. As can be seen in the figure the network does a good job of segmenting both small and large lesions. In the second row however, it undersegments a contusion, possibly mistaking it for background. The third row also shows one of the greater challenges of this segmentation task, where post-surgical sub-dural debris is mistaken as a relevant lesion.~\cite{Kamnitsas:2017}
 
 \section{Conclusions}
 \label{sec:conclusions}
 
+As demonstrated by the work of Havaei, et al. and Kamnitsas, et al. convolutional neural networks show a lot of continued promise going forward. The use of multiple pathways for local and global context was shown to be effective in both works. Havaei, et al. has further shown that cascaded architectures with two-phase training are also useful in improving the state-of-the-art. Meanwhile Kamnitsas, et al. have shown that 3D CNNs have become computationally feasible and that Dense-inference and 3D CRFs show promise as well.
+
+These two works are unfortunately not comparable when it comes to the challenges they partook in, but nevertheless both show a breadth of space for further improvement when it comes to CNNs and medical imaging. Future work could combine some of the techniques used such as using a cascaded architecture with DeepMedic or attempting two-phase training.
 
 
 \section*{Acknowledgments}
