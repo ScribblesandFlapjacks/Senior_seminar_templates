@@ -78,16 +78,11 @@
   \tableofcontents[hideallsubsections]
   \begin{itemize}
   	\item Convolutional neural networks or CNNs, have seen a rise in popularity in image related fields.
-  	\pause
   	\item CNNs have been having great success in biological segmentation tasks.
-  	\pause
   	\item These tasks include:
-  	\pause
   	\begin{itemize}
   	  \item The automated detection of lymph nodes
-  	  \pause
   	  \item Segmentation of knee cartilage
-  	  \pause
   	  \item Detection of Alzheimer's
   	\end{itemize}
   \end{itemize}
@@ -97,17 +92,17 @@
   \frametitle{Introduction Continued}
   \tableofcontents[hideallsubsections]
   \begin{itemize}
-	\item We will be looking at two approaches to brain MRI segmentation.
-	\pause
-	\item The goal of this work is to provide unsegmented MRIs to the network and receive properly segmented MRIs as output.
-	\pause
-	\item Currently this requires time consuming labor from a skilled medical professional.
+	\item We will be looking at two approaches to brain MRI segmentation
+	\item The goal of this work is to provide unsegmented MRIs to the network and receive properly segmented MRIs as output
+	\item Currently this requires time consuming labor from a skilled medical professional
   \end{itemize}
 \end{frame}
 
 \begin{frame} 
 	\frametitle{Input Output Example}
-    \includegraphics[width=0.95\textwidth]{"../Sample_paper/TBI Visuals".pdf}
+    \includegraphics[width=0.75\textwidth]{"../Sample_paper/TBI Visuals".pdf}
+    \\
+    \only{Taken from~\cite{Kamnitsas:2017}}
 \end{frame}
 
 \begin{frame}
@@ -115,8 +110,8 @@
   \tableofcontents[hideallsubsections]
   \begin{itemize}
   	\item Background - Information about basic structural concepts for CNNs
-  	\item Methods used by Havaei, et al.
-  	\item Methods used by Kamnitsas, et al.
+  	\item A novel two pathway approach by Havaei, et al.
+  	\item 3D multi-scale approach by Kamnitsas, et al.
   	\item Results
   	\item Conclusions
   \end{itemize}
@@ -125,16 +120,22 @@
 \subsection*{Background}
 
 \begin{frame}
+  \frametitle{Classification}
+  \begin{itemize}
+	\item Classification is the process of identifying something
+	\item In the case of images we might classify something as an image of a brain versus an image of a foot
+	\item The name of these classifications is often referred to as `labels'
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
   \frametitle{Biological Segmentation}
   \begin{itemize}
 	\item Segmentation is the process of identifying the boundaries of different structures and classifying them
-	\pause
-	\item Segmentation is loosely defined and can have a wide range of granularities.
-	\pause
+	\item Segmentation is loosely defined and can have a wide range of granularities
 	\begin{itemize}
-	  \item Rough graularity such as identifying the different bones in a leg xray.
-	  \pause
-	  \item Smooth granularity such as determining the differing regions of a tumor.
+	  \item Rough graularity such as identifying the different bones in a leg X-ray
+	  \item Smooth granularity such as determining the differing regions of a tumor
 	\end{itemize}
   \end{itemize}
 \end{frame}
@@ -143,9 +144,7 @@
   \frametitle{Neural Networks}
   \begin{itemize}
 	\item Neural Networks are a form of machine learning
-	\pause
 	\item Neural Networks can be thought of as pattern recognizers.
-	\pause
 	\item They are loosely based on the neuronal structure of the cerebral cortex, the part of the brain that takes in sensory data.
   \end{itemize}
 \end{frame}
@@ -154,17 +153,16 @@
   \frametitle{Neural Network Structure}
   \begin{itemize}
 	\item Comprised of layers of nodes
-	\pause
-	\item Each node has an activation function that triggers when it recognizes something in the input.
-	\pause
-	\item These activations are then passed to neighboring nodes through weighted connections eventually leading to some type of output.
-	\pause
-	\item The network can 'learn' by altering the weights of its connections based on the accuracy of the output to the goal result.
+	\item Each node has an activation function that triggers when it recognizes something in the input
+	\item These activations are then passed to neighboring nodes through weighted connections eventually leading to some type of output
+	\item The network can `learn' by altering the weights of its connections based on the accuracy of the output to the goal result
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-    \includegraphics[width=0.5\textwidth]{"../Sample_paper/Neural Network".png}
+	\begin{center}
+	  \includegraphics[width=0.4\textwidth]{"../Sample_paper/Neural Network".png}
+	\end{center}
 \end{frame}
 
 \begin{frame}
@@ -172,8 +170,8 @@
   
   \begin{itemize}
 	\item Kernels, neurons and filters are interchangeable names
-	\pause
 	\item Kernels are an array based representation of image features
+	\item More kernels equals more recognizable features
   \end{itemize}
   
 \end{frame}
@@ -189,11 +187,8 @@
   \frametitle{Convolutional Layers}
   \begin{itemize}
 	\item Convolutional Layers are where CNNs get their name
-	\pause
 	\item Every CNN starts with a convolutional layer
-	\pause
-	\item The Kernel slides or "convolves" around the input image
-	\pause
+	\item The kernel slides or `convolves' around the input image
 	\item The results of the convolutions are stored in the feature map
   \end{itemize}
 \end{frame}
@@ -209,11 +204,7 @@
   \frametitle{Fully Connected Layers} 
   \begin{itemize}
 	\item Can be thought of as the final layers in the network
-	\pause
-	\item Their job is to convert the feature maps from previous layers into label probabilities.
-	\pause
-	\item these probabilities come in the form of a vector that adds up to 1.
-	
+	\item Their job is to convert the feature maps from previous layers into label probabilities	
   \end{itemize}
 \end{frame}
 
@@ -221,22 +212,16 @@
   \frametitle{Training}
   \begin{itemize}
 	\item Training is the crux that makes everything work
-	\pause
-	\item Training requires data that has already been properly segmented.
-	\pause
+	\item Training requires data that has already been properly segmented
 	\item Network is initialized with random kernel weights
-	\pause
 	\item Training has four main steps:
-	\pause
 	\begin{itemize}
 	  \item The forward pass
-	  \pause
 	  \item The loss calculation
-	  \pause
 	  \item The backward pass
-	  \pause
 	  \item Weight update
 	\end{itemize}
+	\item These four steps are performed on the entirety of the training data set multiple times
   \end{itemize}
 \end{frame}
 
@@ -247,15 +232,11 @@
 \begin{frame}
   \frametitle{Overview of Havaei, et al.}
   \begin{itemize}
-	\item Havaei, et al proposes a two pathway approach to the BRATS 2013 brain tumor segmentation challenge.
-	\pause
+	\item Havaei, et al. proposes a two pathway approach to the BRATS 2013 brain tumor segmentation challenge
 	\item Their approach has three main components
-	\pause
 	\begin{itemize}
 	  \item Two pathways
-	  \pause
 	  \item Two CNNs concatenated together
-	  \pause
 	  \item A two phase approach to training
 	\end{itemize}
   \end{itemize}
@@ -265,51 +246,55 @@
   \frametitle{Two Pathways}
   \begin{itemize}
 	\item Havaei, et al. setup their network with two pathways
-	\pause
 	\begin{itemize}
-	  \item The local pathway with a smaller 7x7 receptive field'
-	  \item The global pathway with a larger 13x13 receptive field.
+	  \item The local pathway with a smaller 7x7 pixel receptive field
+	  \item The global pathway with a larger 13x13 pixel receptive field
 	\end{itemize}
-	\pause
-	\item These two pathways allow the combination of finite detail with greater locational context.
+	\item These two pathways allow the combination of fine detail with greater locational context
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Two Pathways}
   \includegraphics[width=1\textwidth]{"../Sample_paper/Two-Pathway".pdf}
+  \\
+  \only{Taken from~\cite{Havaei:2017}}
 \end{frame}
 
-\begin{frame}
+\begin{frame}<presentation:0>[noframenumbering]
   \frametitle{Cascaded Architectures}
   \begin{itemize}
-	\item The second approach implemented by Havaei, et al. is their use of a 'cascaded architecture'.
-	\pause
-	\item In this approach they take the output one of one CNN and concatenate it into a layer of another.
-	\pause
-	\item The goal is to allow for joint segmentation models where different labels are allowed to correlate with one another.
+	\item The second approach implemented by Havaei, et al. is their use of a `cascaded architecture'
+	\item In this approach they take the output of one CNN and concatenate it into varying layers of another CNN
+	\item The goal is to allow for joint segmentation models where different labels are allowed to correlate with one another
   \end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}<presentation:0>[noframenumbering]
   \frametitle{Cascaded Architectures}
-  \includegraphics[width=0.5\textwidth]{"../Sample_paper/Cascaded Architectures".pdf}
+  \includegraphics[width=1\textwidth]{"../Sample_paper/Two-Pathway".pdf}
+  \\
+  \only{Taken from~\cite{Havaei:2017}}
+\end{frame}
+
+\begin{frame}<presentation:0>[noframenumbering]
+  \frametitle{Cascaded Architecture Results}
+  \includegraphics[width=1\textwidth]{"CascadeResults".pdf}
+  \\
+  \only{\tiny{Taken from~\cite{Havaei:2017}}}
 \end{frame}
 
 \begin{frame}
   \frametitle{Two Phase Training}
   \begin{itemize}
-	\item The last approach implemented by Havaei, et al. is a two phase training system.
-	\pause
-	\item This is done to alleviate the relative abundance of healthy tissue versus the small quantity of tumor tissue in each image.
+	\item The last approach implemented by Havaei, et al. is a two phase training system
+	\item This is done to alleviate the relative abundance of healthy tissue versus the small quantity of tumor tissue in each image
 	\item The two phases consist of:
-	\pause
 	\begin{itemize}
-	  \item First they train the network on image patches where the probability of each label being present is equal.
-	  \item Then they retrain the final layer with the relative probabilities of each label.
+	  \item First they train the network on image patches where the probability of each label being present is equal
+	  \item Then they retrain the final layer with the relative probabilities of each label
 	\end{itemize}
-	\pause
-	\item This allows for better label discrimination while maintaining proper output probabilities.
+	\item This allows for better label discrimination while maintaining proper output probabilities
   \end{itemize}
 \end{frame}
 
@@ -319,19 +304,121 @@
   \frametitle{Overview of Kamnitsas, et al.}
   \begin{itemize}
 	\item Kamnitsas, et al have five different architecture approaches
-	\pause
 	\begin{itemize}
-	  \item 3D kernels
-	  \pause
-	  \item Dense training
-	  \pause
-	  \item Two pathways
-	  \pause
-	  \item Deeper networks
-	  \pause
-	  \item 3D conditional random fields on the output
+	  \item<1,2> 3D kernels
+	  \item<1> Dense training
+	  \item<1,2> Two pathways
+	  \item<1,2> Deeper networks
+	  \item<1> 3D conditional random fields on the output
 	\end{itemize}
+	\item These approaches lead to top performances in three different brain related segmentation challenges
   \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{3D Kernels}
+  \begin{itemize}
+	\item 3D kernels can be thought of as 3 dimensional rectangular prisms
+	\item Before the kernel convolved around a 2 dimensional space, but now it is convolving around a 3D space
+	\item 3D kernels add to the computational costs
+	\item Kamnitsas, et al. proposes a hybrid training scheme to resolve this
+  \end{itemize}
+\end{frame}
+
+\begin{frame}<presentation:0>[noframenumbering]
+  \frametitle{Dense Training}
+  \begin{itemize}
+	\item Normally when a feature map reaches the fully connected classifier layer it is of the same dimensions as the classifier's kernel so that the kernel perfectly overlaps the receptive field
+	\item In dense training the feature map being sent to the classifier layer is larger than the receptive field
+	\item In this situation a smaller 1x1x1 kernel is used to provide probabilities for each cell of the feature map independently
+	\item This saves on computational cost by avoiding the use of overlapping image patches
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Two-Pathways}
+  \begin{itemize}
+	\item Much like Havaei, et al. Kamnitsas, et al. use a two pathway approach
+	\item These two pathways are meant to capture global and local context
+	\item Unlike Havaei, et al. they downsample the input image for one of the pathways rather than change the size of the receptive field
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Deeper Networks}
+  \begin{itemize}
+	\item Kamnitsas, et al. also explore the use of deeper neural networks
+	\item A deeper network has more consecutive layers
+	\item Deeper networks increase the discriminative capability of CNNs
+	\item A drawback is the increase in trainable parameters
+	\item Kamnitsas, et al. address this by decreasing the size of the kernels, thus lowering the number of trainable parameters
+  \end{itemize}
+\end{frame}
+
+\begin{frame}<presentation:0>[noframenumbering]
+  \frametitle{3D Conditional Random Fields}
+  \begin{itemize}
+	\item The final technique implemented by Kamnitsas, et al. is a 3D conditional random field
+	\item This 3D CRF is used after the normal classification layer to better incorporate information from neighboring pixels in each pixels predictions
+	\item The 3D CRF was shown to have statistically significant impact on their success in all three of the challenges they participated in
+  \end{itemize}
+\end{frame}
+
+\section*{Results}
+
+\begin{frame} 
+	\frametitle{Havaei, et al. Results}
+	\begin{table}
+	\begin{tabular}{l | c | c | c }
+	Name & Dice & Specificity & Sensitivity\\
+	\hline
+	InputCascadeCNN* & 0.84 & 0.88 & 0.84\\
+	Tustison & 0.79 & 0.83 & 0.81\\
+	Zhao & 0.79 & 0.77 & 0.85\\
+	Meier & 0.72 & 0.65 & 0.88\\
+	Reza & 0.73 & 0.68 & 0.79\\
+	Cordier & 0.75 & 0.79 & 0.78
+	\end{tabular}
+	\caption{Comparison of Havaei, et al's. results on BRATS 2013 leaderboard set}
+	\end{table}
+\end{frame}
+
+\begin{frame} 
+	\frametitle{Kamnitsas, et al. Results}
+	\begin{table}
+	\begin{tabular}{l | c | c | c }
+	Name & Dice & Precision & Sensitivity\\
+	\hline
+	Ensemble+CRF & 90.1 & 91.9 & 89.1\\
+	Ensemble & 90.0 & 90.3 & 90.4\\
+	DeepMedic+CRF & 89.8 & 91.5 & 89.1\\
+	DeepMedic & 89.7 & 89.7 & 90.5\\
+	bakas1 & 88 & 90 & 89\\
+	peres1 & 87 & 89 & 86\\
+	anon1 & 84 & 90 & 82\\
+	thirs1 & 80 & 84 & 79\\
+	peyrj & 80 & 87 & 77
+	\end{tabular}
+	\caption{Average performance of Kamnitsas, et al. on the training data from BRATS 2015 compared to other teams}
+	\end{table}
+\end{frame}
+
+\begin{frame} 
+	\frametitle{Traumatic Brain Injury Example}
+    \includegraphics[width=0.75\textwidth]{"../Sample_paper/TBI Visuals".pdf}
+    \\
+    \only{Taken from~\cite{Kamnitsas:2017}}
+\end{frame}
+
+\begin{frame} 
+	\frametitle{References}
+	\bibliographystyle{amsalpha}
+	\bibliography{../Sample_paper/main}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Acknowledgements}
+	I would like to thank Nic McPhee and Elena Machkasova for their guidance throughout this process. I would also like to thank my parents for their support
 \end{frame}
 
 \end{document}
