@@ -9,6 +9,7 @@
 \usepackage[english]{babel}
 \usepackage[latin1]{inputenc}
 \usepackage{times}
+\usepackage{xcolor,colortbl}
 \usepackage[T1]{fontenc} 
 % Or whatever. Note that the encoding and the font should match. If T1
 % does not look nice, try deleting the line with the fontenc.
@@ -89,7 +90,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Introduction Continued}
+  \frametitle{Introduction}
   \tableofcontents[hideallsubsections]
   \begin{itemize}
 	\item We will be looking at two approaches to brain MRI segmentation
@@ -134,8 +135,8 @@
 	\item Segmentation is the process of identifying the boundaries of different structures and classifying them
 	\item Segmentation is loosely defined and can have a wide range of granularities
 	\begin{itemize}
-	  \item Rough graularity such as identifying the different bones in a leg X-ray
-	  \item Smooth granularity such as determining the differing regions of a tumor
+	  \item Rough grained, such as identifying the different bones in a leg X-ray
+	  \item Fine grained, such as determining the differing regions of a tumor
 	\end{itemize}
   \end{itemize}
 \end{frame}
@@ -245,7 +246,7 @@
 \begin{frame}
   \frametitle{Two Pathways}
   \begin{itemize}
-	\item Havaei, et al. setup their network with two pathways
+	\item Havaei, et al. set up their network with two pathways
 	\begin{itemize}
 	  \item The local pathway with a smaller 7x7 pixel receptive field
 	  \item The global pathway with a larger 13x13 pixel receptive field
@@ -355,6 +356,13 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Deeper Networks}
+  \includegraphics[width=1\textwidth]{"Kamnitsas Basic Architecture".pdf}
+  \\
+  \only{Taken from~\cite{Kamnitsas:2017}}
+\end{frame}
+
 \begin{frame}<presentation:0>[noframenumbering]
   \frametitle{3D Conditional Random Fields}
   \begin{itemize}
@@ -372,7 +380,7 @@
 	\begin{tabular}{l | c | c | c }
 	Name & Dice & Specificity & Sensitivity\\
 	\hline
-	InputCascadeCNN* & 0.84 & 0.88 & 0.84\\
+	\cellcolor{blue!25}InputCascadeCNN* & 0.84 & 0.88 & 0.84\\
 	Tustison & 0.79 & 0.83 & 0.81\\
 	Zhao & 0.79 & 0.77 & 0.85\\
 	Meier & 0.72 & 0.65 & 0.88\\
@@ -389,10 +397,10 @@
 	\begin{tabular}{l | c | c | c }
 	Name & Dice & Precision & Sensitivity\\
 	\hline
-	Ensemble+CRF & 90.1 & 91.9 & 89.1\\
-	Ensemble & 90.0 & 90.3 & 90.4\\
-	DeepMedic+CRF & 89.8 & 91.5 & 89.1\\
-	DeepMedic & 89.7 & 89.7 & 90.5\\
+	\cellcolor{blue!25}Ensemble+CRF & 90.1 & 91.9 & 89.1\\
+	\cellcolor{blue!25}Ensemble & 90.0 & 90.3 & 90.4\\
+	\cellcolor{blue!25}DeepMedic+CRF & 89.8 & 91.5 & 89.1\\
+	\cellcolor{blue!25}DeepMedic & 89.7 & 89.7 & 90.5\\
 	bakas1 & 88 & 90 & 89\\
 	peres1 & 87 & 89 & 86\\
 	anon1 & 84 & 90 & 82\\
@@ -410,16 +418,17 @@
     \only{Taken from~\cite{Kamnitsas:2017}}
 \end{frame}
 
+\begin{frame}
+	\frametitle{Acknowledgements}
+	I would like to thank Nic McPhee and Elena Machkasova for their guidance throughout this process. I would also like to thank my parents for their support.
+\end{frame}
+
 \begin{frame} 
 	\frametitle{References}
 	\bibliographystyle{amsalpha}
 	\bibliography{../Sample_paper/main}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Acknowledgements}
-	I would like to thank Nic McPhee and Elena Machkasova for their guidance throughout this process. I would also like to thank my parents for their support
-\end{frame}
 
 \end{document}
 
